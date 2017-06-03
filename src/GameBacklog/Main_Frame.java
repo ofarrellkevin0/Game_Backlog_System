@@ -511,6 +511,7 @@ public final class Main_Frame extends javax.swing.JFrame
 	{
 	    Connect();
 	    console.UpdateTime(connection, ID);
+	    ConsoleCombo();
 	    connection.close();
 	    startup();
 	} catch (Exception ex)
@@ -618,6 +619,7 @@ public final class Main_Frame extends javax.swing.JFrame
 	{
 	    Connect();
 	    game.UpdateTime(connection, ID);
+	    ConsoleCombo();
 	    connection.close();
 	    startup();
 	} catch (Exception ex)
