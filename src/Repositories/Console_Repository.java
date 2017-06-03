@@ -14,7 +14,7 @@ public class Console_Repository
 	{
 	    String SQL = "{call Insert_Console (?, ?, ?)}";
 	    callablestatement = connection.prepareCall(SQL);
-	    callablestatement.setInt(1, Database_Classes.User.GetID());
+	    callablestatement.setInt(1, Repositories.StaticUser.GetID());
 	    callablestatement.setString(2, name);
 	    callablestatement.setString(3, type);
 	    boolean result = callablestatement.execute();

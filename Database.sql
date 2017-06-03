@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `gamebacklog` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `gamebacklog`;
--- MySQL dump 10.13  Distrib 5.7.9, for osx10.9 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
 --
 -- Host: 127.0.0.1    Database: gamebacklog
 -- ------------------------------------------------------
@@ -33,7 +33,7 @@ CREATE TABLE `Console` (
   PRIMARY KEY (`ID`),
   KEY `fk_Console_User1_idx` (`User_ID`),
   CONSTRAINT `fk_Console_User1` FOREIGN KEY (`User_ID`) REFERENCES `User` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `Console` (
 
 LOCK TABLES `Console` WRITE;
 /*!40000 ALTER TABLE `Console` DISABLE KEYS */;
-INSERT INTO `Console` VALUES (19,1,'Nintendo','Nintendo (NES)','2017-06-02 21:02:15'),(20,1,'GBA','Gameboy Advance','2017-06-02 13:42:33'),(22,1,'test','Atari 2600','2017-06-02 16:45:37'),(23,5,'Xbox360','Xbox 360','2017-06-03 00:54:27'),(24,5,'Playstation','Sony Playstation 1','2017-06-03 00:55:05');
+INSERT INTO `Console` VALUES (19,1,'Nintendo','Nintendo (NES)','2017-06-03 04:30:26'),(23,5,'Xbox360','Xbox 360','2017-06-03 00:54:27'),(24,5,'Playstation','Sony Playstation 1','2017-06-03 00:55:05'),(36,1,'GBA','Gameboy Advance','2017-06-03 04:53:14');
 /*!40000 ALTER TABLE `Console` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,7 +63,7 @@ CREATE TABLE `Game` (
   PRIMARY KEY (`ID`),
   KEY `fk_Game_Console1_idx` (`Console_ID`),
   CONSTRAINT `fk_Game_Console1` FOREIGN KEY (`Console_ID`) REFERENCES `Console` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +72,7 @@ CREATE TABLE `Game` (
 
 LOCK TABLES `Game` WRITE;
 /*!40000 ALTER TABLE `Game` DISABLE KEYS */;
-INSERT INTO `Game` VALUES (2,19,'SuperMario','Platform Game','2017-06-02 13:41:34','Complete'),(3,19,'Metroid','Platform Game','2017-06-02 11:53:52','Incomplete'),(8,20,'Pokemon Ruby','Fantasy RPG','2017-06-03 00:05:10','Complete'),(10,22,'test','Platform Game','2017-06-03 00:51:26','Incomplete'),(11,23,'Fallout3','First Person Shooter','2017-06-03 00:54:45','Incomplete'),(12,24,'Spyro The Dragon','Platform Game','2017-06-03 00:55:29','Incomplete');
+INSERT INTO `Game` VALUES (2,19,'SuperMario','Platform Game','2017-06-02 13:41:34','Complete'),(3,19,'Metroid','Platform Game','2017-06-02 11:53:52','Incomplete'),(11,23,'Fallout3','First Person Shooter','2017-06-03 00:54:45','Incomplete'),(12,24,'Spyro The Dragon','Platform Game','2017-06-03 00:55:29','Incomplete'),(23,36,'Super Mario Advance','Platform Game','2017-06-03 04:53:44','Complete');
 /*!40000 ALTER TABLE `Game` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,7 +92,7 @@ CREATE TABLE `User` (
   `Accesslevel` int(2) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `Username_UNIQUE` (`Username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -464,4 +464,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-03  1:15:13
+-- Dump completed on 2017-06-03  4:59:06

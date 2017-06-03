@@ -1,6 +1,6 @@
 package GameBacklog;
 
-import Database_Classes.User;
+import Repositories.StaticUser;
 import Repositories.Console_Repository;
 import Repositories.Console;
 import Repositories.Game;
@@ -22,7 +22,7 @@ public final class Main_Frame extends javax.swing.JFrame
 
     static FileOutputStream fos;
     static PrintWriter out;
-    Database_Classes.User userclass;
+    Repositories.StaticUser userclass;
     Console_Repository console;
     Connection connection;
     ResultSet resultset;
@@ -493,6 +493,7 @@ public final class Main_Frame extends javax.swing.JFrame
 	{
 	    Connect();
 	    console.Delete(connection, ID);
+	    ConsoleCombo();
 	    connection.close();
 	    startup();
 	} catch (Exception ex)
@@ -526,7 +527,7 @@ public final class Main_Frame extends javax.swing.JFrame
 	    Connect();
 	    String SQL = "{ call Select_Consoles (?) }";
 	    callablestatement = connection.prepareCall(SQL);
-	    callablestatement.setInt(1, Database_Classes.User.GetID());
+	    callablestatement.setInt(1, Repositories.StaticUser.GetID());
 	    resultset = callablestatement.executeQuery();
 	    DatabaseTextArea.setText(print(resultset));
 	    connection.close();
@@ -542,14 +543,14 @@ public final class Main_Frame extends javax.swing.JFrame
     {//GEN-HEADEREND:event_ConsolestoFileButtonActionPerformed
 	try
 	{
-	    fos = new FileOutputStream(new File("Consoles" + Database_Classes.User.GetUsername() + ".txt"));
+	    fos = new FileOutputStream(new File("Consoles" + Repositories.StaticUser.GetUsername() + ".txt"));
 	    out = new PrintWriter(fos);
 
 	    console = new Console_Repository();
 	    Connect();
 	    String SQL = "{ call Select_Consoles (?) }";
 	    callablestatement = connection.prepareCall(SQL);
-	    callablestatement.setInt(1, Database_Classes.User.GetID());
+	    callablestatement.setInt(1, Repositories.StaticUser.GetID());
 	    resultset = callablestatement.executeQuery();
 	    out.print(print(resultset));
 	    out.flush();
@@ -650,7 +651,7 @@ public final class Main_Frame extends javax.swing.JFrame
     {//GEN-HEADEREND:event_GamestoFileButtonActionPerformed
 	try
 	{
-	    fos = new FileOutputStream(new File("games" + Database_Classes.User.GetUsername() + ".txt"));
+	    fos = new FileOutputStream(new File("games" + Repositories.StaticUser.GetUsername() + ".txt"));
 	    out = new PrintWriter(fos);
 
 	    Console selected_item = (Console) ConsolesPanelCombo.getSelectedItem();
@@ -680,7 +681,7 @@ public final class Main_Frame extends javax.swing.JFrame
 	    Connect();
 	    String SQL = "{ call Select_All_Games (?) }";
 	    callablestatement = connection.prepareCall(SQL);
-	    callablestatement.setInt(1, Database_Classes.User.GetID());
+	    callablestatement.setInt(1, Repositories.StaticUser.GetID());
 	    resultset = callablestatement.executeQuery();
 	    DatabaseTextArea.setText(print(resultset));
 	    connection.close();
@@ -696,14 +697,14 @@ public final class Main_Frame extends javax.swing.JFrame
     {//GEN-HEADEREND:event_AllGamestoFileButtonActionPerformed
 	try
 	{
-	    fos = new FileOutputStream(new File("AllGames" + Database_Classes.User.GetUsername() + ".txt"));
 	    out = new PrintWriter(fos);
 
 	    console = new Console_Repository();
 	    Connect();
+	    Connect();
 	    String SQL = "{ call Select_All_Games (?) }";
 	    callablestatement = connection.prepareCall(SQL);
-	    callablestatement.setInt(1, Database_Classes.User.GetID());
+	    callablestatement.setInt(1, Repositories.StaticUser.GetID());
 	    resultset = callablestatement.executeQuery();
 	    out.print(print(resultset));
 	    out.flush();
@@ -747,7 +748,7 @@ public final class Main_Frame extends javax.swing.JFrame
 	    callablestatement.close();
 	} catch (Exception ex)
 	{
-	    JOptionPane.showMessageDialog(null, "Encountered a problem with a menu.  Please try again later");
+
 	}
     }//GEN-LAST:event_ConsolesPanelComboItemStateChanged
 
@@ -804,7 +805,7 @@ public final class Main_Frame extends javax.swing.JFrame
 	    AccountsButton.setVisible(true);
 	}
 
-	WelcomeLabel.setText("Welcome " + User.GetUsername());
+	WelcomeLabel.setText("Welcome " + StaticUser.GetUsername());
 
 	ConsoleCombo();
 	GameCombo();
@@ -816,10 +817,10 @@ public final class Main_Frame extends javax.swing.JFrame
 	{
 	    ConsolesPanelCombo.removeAllItems();
 	    console = new Console_Repository();
-	    Connect(); 
+	    Connect();
 	    String SQL = "{ call Select_Console_Combo (?) }";
 	    callablestatement = connection.prepareCall(SQL);
-	    callablestatement.setInt(1, Database_Classes.User.GetID()); 
+	    callablestatement.setInt(1, Repositories.StaticUser.GetID());
 	    ResultSet res = callablestatement.executeQuery();
 
 	    while (res.next())
@@ -827,7 +828,7 @@ public final class Main_Frame extends javax.swing.JFrame
 		String name = res.getString("name");
 		String type = res.getString("type");
 		int ID = res.getInt("ID");
-		Console item = new Console(ID, type, name); 
+		Console item = new Console(ID, type, name);
 		ConsolesPanelCombo.addItem(item);
 	    }
 
@@ -835,7 +836,7 @@ public final class Main_Frame extends javax.swing.JFrame
 	    callablestatement.close();
 	} catch (Exception ex)
 	{
-	    JOptionPane.showMessageDialog(null, "Encountered a problem with a  menu.  Please try again later");
+	    //JOptionPane.showMessageDialog(null, "Encountered a problem with console menu.  Please try again later");
 	}
     }
 
@@ -866,7 +867,7 @@ public final class Main_Frame extends javax.swing.JFrame
 	    callablestatement.close();
 	} catch (Exception ex)
 	{
-	    JOptionPane.showMessageDialog(null, "Encountered a problem with a menu.  Please try again later");
+	    //JOptionPane.showMessageDialog(null, "Encountered a problem with a game menu.  Please try again later");
 	}
     }
 

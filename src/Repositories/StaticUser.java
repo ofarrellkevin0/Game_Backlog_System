@@ -1,6 +1,6 @@
-package Database_Classes;
+package Repositories;
 
-public class User
+public class StaticUser
 {
 
     private static int ID;
@@ -17,7 +17,7 @@ public class User
 
     public void SetID(int ID)
     {
-	User.ID = ID;
+	StaticUser.ID = ID;
     }
 
     public static String GetFirstname()
@@ -27,7 +27,7 @@ public class User
 
     public void SetFirstname(String firstname)
     {
-	User.firstname = firstname;
+	StaticUser.firstname = firstname;
     }
 
     public static String GetLastname()
@@ -37,7 +37,7 @@ public class User
 
     public void SetLastname(String lastname)
     {
-	User.lastname = lastname;
+	StaticUser.lastname = lastname;
     }
 
     public static String GetUsername()
@@ -47,7 +47,7 @@ public class User
 
     public void SetUsername(String username)
     {
-	User.username = username;
+	StaticUser.username = username;
     }
 
     public static String GetPassword()
@@ -57,7 +57,7 @@ public class User
 
     public void SetPassword(String password)
     {
-	User.password = password;
+	StaticUser.password = password;
     }
 
     public static int GetAccesslevel()
@@ -67,7 +67,7 @@ public class User
 
     public void SetAccessLevel(int accesslevel)
     {
-	User.accesslevel = accesslevel;
+	StaticUser.accesslevel = accesslevel;
     }
 
 }

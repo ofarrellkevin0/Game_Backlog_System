@@ -27,7 +27,7 @@ public class User_Repository
 
     public ResultSet Login(Connection connection, String username, String password)
     {
-	ResultSet results;
+	ResultSet results = null;
 	try
 	{
 	    String SQL = "{call Login (?, ?)}";
@@ -40,7 +40,7 @@ public class User_Repository
 	{
 	    System.out.println("one \t" + ex);
 	}
-	return null;
+	return results;
     }
 
     public void Register(Connection connection, String firstname, String lastname, String username, String password)
@@ -81,8 +81,8 @@ public class User_Repository
 	    System.out.println(ex);
 	}
     }
-    
-        public void delete(Connection connection, int ID)
+
+    public void delete(Connection connection, int ID)
     {
 	try
 	{

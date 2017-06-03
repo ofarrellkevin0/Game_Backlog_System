@@ -1,6 +1,6 @@
 package GameBacklog;
 
-import Database_Classes.User;
+import Repositories.StaticUser;
 import Repositories.User_Repository;
 import com.sun.rowset.JdbcRowSetImpl;
 import java.sql.CallableStatement;
@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 public final class Login_Frame extends javax.swing.JFrame
 {
 
-    Database_Classes.User userclass;
+    Repositories.StaticUser userclass;
     User_Repository user;
     Main_Frame main = new Main_Frame();
     Connection connection;
@@ -27,7 +27,7 @@ public final class Login_Frame extends javax.swing.JFrame
     {
 	initComponents();
 	user = new User_Repository();
-	userclass = new Database_Classes.User();
+	userclass = new Repositories.StaticUser();
     }
 
     public final void Connect()
@@ -67,7 +67,7 @@ public final class Login_Frame extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        UsernameField.setText("Soulhunter711");
+        UsernameField.setText("Admin");
 
         UsernameLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         UsernameLabel.setText("Username");
@@ -110,7 +110,7 @@ public final class Login_Frame extends javax.swing.JFrame
             }
         });
 
-        PasswordField.setText("Shadowhunter711");
+        PasswordField.setText("123456");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,7 +176,6 @@ public final class Login_Frame extends javax.swing.JFrame
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_LoginButtonActionPerformed
     {//GEN-HEADEREND:event_LoginButtonActionPerformed
-
 	try
 	{
 	    Connect();
@@ -187,6 +186,10 @@ public final class Login_Frame extends javax.swing.JFrame
 	    if (resultset.next())
 	    {
 		result(resultset);
+		UnsuccessfulLabel.setText("The Login Attempt was successful");
+		main.setVisible(true);
+		this.setVisible(false);
+		main.startup();
 
 	    } else
 	    {
@@ -201,9 +204,6 @@ public final class Login_Frame extends javax.swing.JFrame
 	    {
 		user.Close();
 		connection.close();
-		main.setVisible(true);
-		this.setVisible(false);
-		main.startup();
 	    } catch (Exception ex)
 	    {
 		JOptionPane.showMessageDialog(null, "Encountered a problem logging in.  Please try again later");
@@ -253,7 +253,7 @@ public final class Login_Frame extends javax.swing.JFrame
 
 	try
 	{
-	    userclass = new User();
+	    userclass = new StaticUser();
 	    int ID = resultSet.getInt(1);
 	    userclass.SetID(ID);
 	    String firstname = resultSet.getString(2);

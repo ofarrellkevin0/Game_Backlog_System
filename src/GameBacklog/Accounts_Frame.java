@@ -16,7 +16,7 @@ import javax.swing.table.TableModel;
 public final class Accounts_Frame extends javax.swing.JFrame
 {
 
-    Database_Classes.User userclass;
+    Repositories.StaticUser userclass;
     User_Repository userclassRep = new User_Repository();
     Connection connection;
     ResultSet resultset;
