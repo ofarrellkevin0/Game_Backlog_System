@@ -3,6 +3,9 @@ package GameBacklog;
 import Repositories.StaticUser;
 import Repositories.User_Repository;
 import com.sun.rowset.JdbcRowSetImpl;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,6 +29,7 @@ public final class Login_Frame extends javax.swing.JFrame
     public Login_Frame()
     {
 	initComponents();
+	centreWindow(this);
 	user = new User_Repository();
 	userclass = new Repositories.StaticUser();
     }
@@ -270,4 +274,13 @@ public final class Login_Frame extends javax.swing.JFrame
 	    JOptionPane.showMessageDialog(null, "Encountered a problem logging in.  Please try again later");
 	}
     }
+
+    public static void centreWindow(Window frame)
+    {
+	Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	frame.setLocation(x, y);
+    }
+
 }

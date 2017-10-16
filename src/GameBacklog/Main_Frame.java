@@ -6,6 +6,9 @@ import Repositories.Console;
 import Repositories.Game;
 import Repositories.Game_Repository;
 import com.sun.rowset.JdbcRowSetImpl;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -35,7 +38,7 @@ public final class Main_Frame extends javax.swing.JFrame
     public Main_Frame()
     {
 	initComponents();
-
+	centreWindow(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -512,6 +515,7 @@ public final class Main_Frame extends javax.swing.JFrame
 	    Connect();
 	    console.UpdateTime(connection, ID);
 	    ConsoleCombo();
+	    GameCombo();
 	    connection.close();
 	    startup();
 	} catch (Exception ex)
@@ -595,6 +599,7 @@ public final class Main_Frame extends javax.swing.JFrame
 
     private void GamesPanelDeleteButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_GamesPanelDeleteButtonActionPerformed
     {//GEN-HEADEREND:event_GamesPanelDeleteButtonActionPerformed
+
 	Game_Repository game = new Game_Repository();
 	Game selected_item = (Game) GamesPanelCombo.getSelectedItem();
 	int ID = selected_item.getId();
@@ -602,8 +607,11 @@ public final class Main_Frame extends javax.swing.JFrame
 	{
 	    Connect();
 	    game.delete(connection, ID);
+	    ConsoleCombo();
+	    GameCombo();
 	    connection.close();
 	    startup();
+
 	} catch (Exception ex)
 	{
 	    JOptionPane.showMessageDialog(null, "Encountered a problem with this button.  Please try again later");
@@ -689,7 +697,6 @@ public final class Main_Frame extends javax.swing.JFrame
 	    connection.close();
 	    callablestatement.close();
 	} catch (Exception ex)
-
 	{
 	    JOptionPane.showMessageDialog(null, "Encountered a problem with this button.  Please try again later");
 	}
@@ -699,10 +706,10 @@ public final class Main_Frame extends javax.swing.JFrame
     {//GEN-HEADEREND:event_AllGamestoFileButtonActionPerformed
 	try
 	{
+	    fos = new FileOutputStream(new File("AllGames" + Repositories.StaticUser.GetUsername() + ".docx"));
 	    out = new PrintWriter(fos);
 
 	    console = new Console_Repository();
-	    Connect();
 	    Connect();
 	    String SQL = "{ call Select_All_Games (?) }";
 	    callablestatement = connection.prepareCall(SQL);
@@ -713,7 +720,6 @@ public final class Main_Frame extends javax.swing.JFrame
 	    connection.close();
 	    callablestatement.close();
 	} catch (Exception ex)
-
 	{
 	    JOptionPane.showMessageDialog(null, "Encountered a problem with this button.  Please try again later");
 	}
@@ -915,5 +921,13 @@ public final class Main_Frame extends javax.swing.JFrame
 	    JOptionPane.showMessageDialog(null, "Encountered a problem with printing the results.  Please try again later");
 	}
 	return results;
+    }
+
+    public static void centreWindow(Window frame)
+    {
+	Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	frame.setLocation(x, y);
     }
 }

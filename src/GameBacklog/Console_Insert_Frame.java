@@ -4,6 +4,9 @@ import Repositories.Console_Repository;
 import Repositories.Regix_Manager_Class;
 import Repositories.User_Repository;
 import com.sun.rowset.JdbcRowSetImpl;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -27,6 +30,7 @@ public class Console_Insert_Frame extends javax.swing.JFrame
     public Console_Insert_Frame()
     {
 	initComponents();
+	centreWindow(this);
     }
 
     public final void Connect()
@@ -136,7 +140,7 @@ public class Console_Insert_Frame extends javax.swing.JFrame
                 .addGroup(InsertPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(InsertButton)
                     .addComponent(CancelButton))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -150,9 +154,10 @@ public class Console_Insert_Frame extends javax.swing.JFrame
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(InsertPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(InsertPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -194,7 +199,7 @@ public class Console_Insert_Frame extends javax.swing.JFrame
 		    console.insert(connection, field, combo);
 		} catch (Exception ex)
 		{
-		     JOptionPane.showMessageDialog(null, "Encountered a problem with the button.  Please try again later.");
+		    JOptionPane.showMessageDialog(null, "Encountered a problem with the button.  Please try again later.");
 		} finally
 		{
 		    try
@@ -240,4 +245,13 @@ public class Console_Insert_Frame extends javax.swing.JFrame
     private javax.swing.JTextField NameTextField;
     private javax.swing.JLabel TypeLabel;
     // End of variables declaration//GEN-END:variables
+
+    public static void centreWindow(Window frame)
+    {
+	Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	frame.setLocation(x, y);
+    }
+
 }

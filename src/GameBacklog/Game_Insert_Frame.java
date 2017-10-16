@@ -4,6 +4,9 @@ import Repositories.Game_Repository;
 import Repositories.Regix_Manager_Class;
 import Repositories.User_Repository;
 import com.sun.rowset.JdbcRowSetImpl;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,6 +31,7 @@ public class Game_Insert_Frame extends javax.swing.JFrame
     public Game_Insert_Frame()
     {
 	initComponents();
+	centreWindow(this);
     }
 
     public void pass(int ID)
@@ -220,7 +224,7 @@ public class Game_Insert_Frame extends javax.swing.JFrame
 		    game.insert(connection, ConsoleID, field, combo, Status);
 		} catch (Exception ex)
 		{
-		     JOptionPane.showMessageDialog(null, "Encountered a problem with the button.  Please try again later.");
+		    JOptionPane.showMessageDialog(null, "Encountered a problem with the button.  Please try again later.");
 		} finally
 		{
 		    try
@@ -269,4 +273,11 @@ public class Game_Insert_Frame extends javax.swing.JFrame
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 
+    public static void centreWindow(Window frame)
+    {
+	Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	frame.setLocation(x, y);
+    }
 }

@@ -4,6 +4,9 @@ import Repositories.Console_Repository;
 import Repositories.Regix_Manager_Class;
 import Repositories.User_Repository;
 import com.sun.rowset.JdbcRowSetImpl;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -30,6 +33,7 @@ public class Console_Update_Frame extends javax.swing.JFrame
     public Console_Update_Frame()
     {
 	initComponents();
+	centreWindow(this);
     }
 
     public void pass(int ID, String name, String type)
@@ -188,7 +192,7 @@ public class Console_Update_Frame extends javax.swing.JFrame
 		    console.update(connection, ID, field, combo);
 		} catch (Exception ex)
 		{
-		     JOptionPane.showMessageDialog(null, "Encountered a problem with the button.  Please try again later.");
+		    JOptionPane.showMessageDialog(null, "Encountered a problem with the button.  Please try again later.");
 		} finally
 		{
 		    try
@@ -252,5 +256,13 @@ public class Console_Update_Frame extends javax.swing.JFrame
 	    System.out.print(ex);
 	    System.exit(0);
 	}
+    }
+
+    public static void centreWindow(Window frame)
+    {
+	Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	frame.setLocation(x, y);
     }
 }

@@ -3,6 +3,9 @@ package GameBacklog;
 import Repositories.Regix_Manager_Class;
 import Repositories.User_Repository;
 import com.sun.rowset.JdbcRowSetImpl;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,6 +28,7 @@ public class Register_Frame extends javax.swing.JFrame
     public Register_Frame()
     {
 	initComponents();
+	centreWindow(this);
 	Regix = new Regix_Manager_Class();
 	user = new User_Repository();
     }
@@ -331,4 +335,13 @@ public class Register_Frame extends javax.swing.JFrame
     private javax.swing.JLabel UsernameLabel;
     private javax.swing.JLabel unsuccessfulLabel;
     // End of variables declaration//GEN-END:variables
+
+    public static void centreWindow(Window frame)
+    {
+	Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	frame.setLocation(x, y);
+    }
+    
 }

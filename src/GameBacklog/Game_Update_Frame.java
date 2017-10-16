@@ -4,6 +4,9 @@ import Repositories.Game_Repository;
 import Repositories.Regix_Manager_Class;
 import Repositories.User_Repository;
 import com.sun.rowset.JdbcRowSetImpl;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,7 +15,7 @@ import javax.swing.JOptionPane;
 
 public class Game_Update_Frame extends javax.swing.JFrame
 {
-
+    
     public static String name;
     public static String type;
     public static String status;
@@ -27,17 +30,18 @@ public class Game_Update_Frame extends javax.swing.JFrame
     String URL = "jdbc:mysql://localhost:3306/gamebacklog";
     String DB_Username = "root";
     String DB_Password = "root";
-
+    
     public Game_Update_Frame()
     {
 	initComponents();
+	centreWindow(this);
     }
-
+    
     public final void Connect()
     {
-
+	
 	RowSet = new JdbcRowSetImpl();
-
+	
 	try
 	{
 	    connection = DriverManager.getConnection(URL, DB_Username, DB_Password);
@@ -51,8 +55,8 @@ public class Game_Update_Frame extends javax.swing.JFrame
 	    System.exit(0);
 	}
     }
-
-        public void pass(int ID, String name, String type, String Status)
+    
+    public void pass(int ID, String name, String type, String Status)
     {
 	Game_Update_Frame.ID = ID;
 	Game_Update_Frame.name = name;
@@ -62,7 +66,7 @@ public class Game_Update_Frame extends javax.swing.JFrame
 	UpdateCombo.setSelectedItem(Game_Update_Frame.type);
 	StatusCombo.setSelectedItem(Game_Update_Frame.status);
     }
-	
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents()
@@ -192,7 +196,7 @@ public class Game_Update_Frame extends javax.swing.JFrame
 
     private void InsertButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_InsertButtonActionPerformed
     {//GEN-HEADEREND:event_InsertButtonActionPerformed
-
+	
 	try
 	{
 	    String combo = UpdateCombo.getSelectedItem().toString();
@@ -207,7 +211,7 @@ public class Game_Update_Frame extends javax.swing.JFrame
 		{
 		    ErrorLabel.setText("");
 		}
-
+		
 		if (Regix.Is_Characters_And_Numbers(field) == false)
 		{
 		    ErrorLabel.setText("Name can only have Letters and numbers (3-20)");
@@ -224,10 +228,10 @@ public class Game_Update_Frame extends javax.swing.JFrame
 		try
 		{
 		    Connect();
-		    game.update(connection, ID,  field, combo, Status);
+		    game.update(connection, ID, field, combo, Status);
 		} catch (Exception ex)
 		{
-		     JOptionPane.showMessageDialog(null, "Encountered a problem with the button  Please try again later.");
+		    JOptionPane.showMessageDialog(null, "Encountered a problem with the button  Please try again later.");
 		} finally
 		{
 		    try
@@ -241,7 +245,7 @@ public class Game_Update_Frame extends javax.swing.JFrame
 		    {
 			System.out.print(ex);
 		    }
-
+		    
 		}
 	    } else
 	    {
@@ -275,4 +279,13 @@ public class Game_Update_Frame extends javax.swing.JFrame
     private javax.swing.JComboBox UpdateCombo;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+    public static void centreWindow(Window frame)
+    {
+	Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	frame.setLocation(x, y);
+    }
+    
 }
